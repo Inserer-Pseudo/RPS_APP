@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 from tensorflow.keras.models import load_model
 
 # Constants
@@ -23,6 +24,9 @@ cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, CAPTURE_WIDTH)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, CAPTURE_HEIGHT)
 cv2.namedWindow(WINDOW_NAME)
+
+# Delay before starting
+time.sleep(3)
 
 # Define ROIs
 roi_w, roi_h = int(CAPTURE_WIDTH * ROI_SCALE), int(CAPTURE_HEIGHT)
@@ -70,7 +74,23 @@ while True:
     cv2.rectangle(frame, (roi2_x, roi_y), (roi2_x + roi_w, roi_y + roi_h), ROI_CLR, 2)
     cv2.putText(frame, f"{label2} ({conf2:.2f})", (roi2_x + 10, roi_y + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, ROI_CLR, 2)
     
-    cv2.putText(frame, "HDU / Polytech - 2025", (CAPTURE_WIDTH//2 - 100, CAPTURE_HEIGHT - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+    for i, (roi_x, label) in enumerate([(roi1_x, label1), (roi2_x, label2)]):
+        prediction_img = CLASS_IMG.get(label, None)
+        if prediction_img:
+            icon = cv2.imread(prediction_img, cv2.IMREAD_UNCHANGED)
+            if icon is not None:
+                alpha_channel = icon[:, :, 3]
+                rgb_channels = icon[:, :, :3]
+                background = np.ones_like(rgb_channels) * (255, 0, 125)
+                alpha_factor = alpha_channel[:, :, np.newaxis].astype(np.float32) / 255.0
+                blended_img = (rgb_channels.astype(np.float32) * alpha_factor + background.astype(np.float32) * (1 - alpha_factor)).astype(np.uint8)
+                blended_img = cv2.resize(blended_img, PREDICTION_IMG_SIZE, interpolation=cv2.INTER_AREA)
+
+                # Placement en haut à droite
+                frame[roi_y:roi_y + PREDICTION_IMG_SIZE[1], roi_x + roi_w - PREDICTION_IMG_SIZE[0]:roi_x + roi_w] = blended_img
+
+    
+    cv2.putText(frame, "HDU / Polytech - 2025", (CAPTURE_WIDTH//2 - 200, CAPTURE_HEIGHT - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     cv2.putText(frame, winner, (CAPTURE_WIDTH//2 - 60, CAPTURE_HEIGHT//2), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
     
     cv2.imshow(WINDOW_NAME, frame)
