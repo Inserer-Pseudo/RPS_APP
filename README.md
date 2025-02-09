@@ -49,6 +49,7 @@ Les technologies suivantes ont été utilisées :
 
 Avant de commencer :checkered_flag:, assurez-vous d'avoir :
 - [Python 3](https://www.python.org/)
+- Un modèle keras compatible
 - Une webcam fonctionnelle
 
 ## :checkered_flag: Starting ##
@@ -57,14 +58,17 @@ Avant de commencer :checkered_flag:, assurez-vous d'avoir :
 # Installer les dépendances
 $ pip install opencv-python numpy tensorflow
 
+# Créer un dossier <models> et placer le modèle à l'intérieur
+$ mkdir models
+
 # Lancer l'application
 $ python app.py
 ```
 
 :memo: License
-Ce projet est sous licence POLYTECH. Pour plus d'infos, se renseigner auprès de Polytech.
+Aucune licence
 
-Fait avec :heart: par <a href="https://github.com/Inserer-Pseudo" target="_blank">Thibaut & Mathis & Benjamin</a>  
+Fait avec :heart: par <a href="https://github.com/Inserer-Pseudo" target="_blank">Mathis & Benjamin</a>  
 
 <a href="#top">Retour en haut</a>
 
