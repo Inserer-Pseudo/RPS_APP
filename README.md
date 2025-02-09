@@ -1,15 +1,15 @@
 pip install opencv-python numpy tensorflow
 
 <div align="center" id="top"> 
-  <img src="./logo.jpg" alt="Rock Paper Scissors App" />
+  <img src="./icons/paper.png" alt="Rock Paper Scissors App" />
   &#xa0;
 </div>
 <h1 align="center">Rock Paper Scissors App</h1>
 
 <p align="center">
-  <img alt="Language primaire" src="https://img.shields.io/github/languages/top/Inserer-Pseudo/RPS-App?color=56BEB8">
-  <img alt="Nbr languages" src="https://img.shields.io/github/languages/count/Inserer-Pseudo/RPS-App?color=56BEB8">
-  <img alt="Taille repo" src="https://img.shields.io/github/repo-size/Inserer-Pseudo/RPS-App?color=56BEB8">
+  <img alt="Language primaire" src="https://img.shields.io/github/languages/top/Inserer-Pseudo/RPS_APP?color=56BEB8">
+  <img alt="Nbr languages" src="https://img.shields.io/github/languages/count/Inserer-Pseudo/RPS_APP?color=56BEB8">
+  <img alt="Taille repo" src="https://img.shields.io/github/repo-size/Inserer-Pseudo/RPS_APP?color=56BEB8">
 </p>
 
 <hr>
